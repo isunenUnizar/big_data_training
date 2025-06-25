@@ -50,4 +50,9 @@ archivos <- list.files(path = "raw_data", pattern = "\\.gpkg$", full.names = TRU
 resultados <- future_map_dfr(archivos, ~ procesar_archivo(.x, zaragoza))
 print(resultados)
 
+# Crear carpeta data si no existe (opcional si ya lo hiciste desde bash)
+if (!dir.exists("data")) dir.create("data")
+
+# Guardar resultado en CSV
+write.csv(resultados, file = "data/resultados_abril_2025.csv", row.names = FALSE)
 
